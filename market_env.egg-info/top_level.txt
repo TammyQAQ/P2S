@@ -1,0 +1,7 @@
+P2S
+assets
+env
+figures
+playground
+plots
+venv
