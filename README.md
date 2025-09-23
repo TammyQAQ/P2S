@@ -63,3 +63,20 @@ pip install -e ".[dev]"
 ```bash
 pre-commit install
 ```
+
+## Ethereum Fork Implementation
+
+For implementing P2S in an Ethereum fork, see the `fork/` directory:
+
+- **Setup**: `fork/setup_ethereum_fork.sh` - Automated Ethereum fork setup
+- **Bridge**: `fork/p2s_ethereum_bridge.py` - Python bridge server
+- **Tests**: `fork/test_p2s_implementation.py` - Test suite
+- **Docs**: `fork/ETHEREUM_FORK_SETUP.md` - Detailed setup guide
+
+### Quick Start for Ethereum Fork
+
+```bash
+cd fork
+chmod +x setup_ethereum_fork.sh
+./setup_ethereum_fork.sh
+```

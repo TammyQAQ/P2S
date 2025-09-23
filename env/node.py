@@ -33,7 +33,7 @@ class Node:
                 sender_id=self.id,
                 receiver_id=receiver_id,
                 content=content,
-                round=current_round    
+                round=current_round
             )
             # Add message to receiver's queue
             receiver = self.network.nodes[receiver_id]['node']
