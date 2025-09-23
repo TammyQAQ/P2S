@@ -1,6 +1,6 @@
 # P2S Implementation Guide
 
-## 🎯 How I Forked and Implemented P2S
+## How I Forked and Implemented P2S
 
 ### 1. **Understanding Your Specification**
 Your formal specification described a 3-step process:
@@ -27,17 +27,17 @@ I created a **two-layer approach**:
 ```python
 @dataclass
 class PHTTransaction:
-    sender: str          # ✅ Revealed
-    nonce: int           # ✅ Revealed
-    gas_limit: int       # ✅ Revealed
-    gas_price: int       # ✅ Revealed
-    hash: str            # ✅ Revealed
-    signature: str       # ✅ Revealed
+    sender: str          # Revealed
+    nonce: int           # Revealed
+    gas_limit: int       # Revealed
+    gas_price: int       # Revealed
+    hash: str            # Revealed
+    signature: str       # Revealed
     # Hidden fields (revealed in MT)
-    recipient: Optional[str] = None    # ❌ Hidden
-    value: Optional[int] = None        # ❌ Hidden
-    call_data: Optional[str] = None    # ❌ Hidden
-    commitment: Optional[str] = None   # ❌ Hidden
+    recipient: Optional[str] = None    # Hidden
+    value: Optional[int] = None        # Hidden
+    call_data: Optional[str] = None    # Hidden
+    commitment: Optional[str] = None   # Hidden
 ```
 
 #### **MT (Matching Transaction)**
@@ -45,9 +45,9 @@ class PHTTransaction:
 @dataclass
 class MTTransaction:
     # All PHT fields plus revealed fields
-    recipient: str        # ✅ Now revealed
-    value: int           # ✅ Now revealed
-    call_data: str       # ✅ Now revealed
+    recipient: str        # Now revealed
+    value: int           # Now revealed
+    call_data: str       # Now revealed
     pht_hash: str        # Reference to PHT
     proof: str           # Proof of matching
 ```
@@ -72,9 +72,9 @@ b2 = protocol.step2_full_execution(proposer, slot)
 ### 5. **MEV Mitigation Strategy**
 
 #### **Hidden Fields in B₁**
-- Recipient address hidden → Prevents front-running
-- Transaction value hidden → Prevents sandwich attacks
-- Call data hidden → Prevents MEV extraction
+- Recipient address hidden - Prevents front-running
+- Transaction value hidden - Prevents sandwich attacks
+- Call data hidden - Prevents MEV extraction
 
 #### **Delayed Revelation in B₂**
 - Details only revealed after B₁ is confirmed
@@ -86,7 +86,7 @@ b2 = protocol.step2_full_execution(proposer, slot)
 - Ensures transaction integrity
 - Prevents malicious behavior
 
-## 🚀 **How to Use**
+## **How to Use**
 
 ### **Quick Start (Python Simulation)**
 ```bash
@@ -128,12 +128,12 @@ P2S/
 ```
 
 ### **What I Cleaned Up**
-- ❌ Removed duplicate documentation files
-- ❌ Removed redundant test files
-- ❌ Removed complex verification files
-- ❌ Removed unnecessary summary files
+- Removed duplicate documentation files
+- Removed redundant test files
+- Removed complex verification files
+- Removed unnecessary summary files
 
-## 🔬 **Key Implementation Details**
+## **Key Implementation Details**
 
 ### **1. Proposer Selection**
 ```python
@@ -169,7 +169,7 @@ def create_mt_transaction(pht, recipient, value, call_data):
     )
 ```
 
-## 🎯 **Next Steps**
+## **Next Steps**
 
 1. **Test the implementation**:
    ```bash
@@ -187,4 +187,4 @@ def create_mt_transaction(pht, recipient, value, call_data):
    ./setup_ethereum_fork.sh
    ```
 
-The implementation is now clean, organized, and ready for your P2S research! 🚀
+The implementation is now clean, organized, and ready for your P2S research!

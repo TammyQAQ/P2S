@@ -14,7 +14,7 @@ from p2s_protocol import (
 
 def demonstrate_p2s_workflow():
     """Demonstrate the complete P2S workflow"""
-    print("🚀 P2S Protocol Demonstration")
+    print("P2S Protocol Demonstration")
     print("=" * 50)
     
     # Initialize protocol with validators
@@ -24,14 +24,14 @@ def demonstrate_p2s_workflow():
     # Simulate users and transactions
     users = [f"user_{i}" for i in range(5)]
     
-    print("\n📝 Step 0: Proposer Selection")
+    print("\nStep 0: Proposer Selection")
     print("-" * 30)
     
     # Step 0: Select proposer for slot 100
     slot = 100
     proposer = protocol.step0_proposer_selection(slot)
     
-    print(f"\n🔒 Step 1: Partial Transaction Commitment")
+    print(f"\nStep 1: Partial Transaction Commitment")
     print("-" * 40)
     
     # Users submit PHTs
@@ -233,7 +233,7 @@ def run_performance_benchmark():
 
 def main():
     """Main demonstration function"""
-    print("🎭 P2S Protocol Complete Demonstration")
+    print("P2S Protocol Complete Demonstration")
     print("=" * 60)
     
     # Run main workflow demonstration
@@ -245,14 +245,14 @@ def main():
     # Run performance benchmark
     run_performance_benchmark()
     
-    print("\n🎉 P2S Protocol Demonstration Complete!")
+    print("\nP2S Protocol Demonstration Complete!")
     print("=" * 60)
     print("Key Benefits Demonstrated:")
-    print("  ✅ MEV Mitigation through hidden transaction details")
-    print("  ✅ Delayed revelation prevents front-running")
-    print("  ✅ Byzantine consensus ensures security")
-    print("  ✅ Scalable performance for high transaction loads")
-    print("  ✅ User utility preservation")
+    print("  MEV Mitigation through hidden transaction details")
+    print("  Delayed revelation prevents front-running")
+    print("  Byzantine consensus ensures security")
+    print("  Scalable performance for high transaction loads")
+    print("  User utility preservation")
 
 if __name__ == "__main__":
     main()

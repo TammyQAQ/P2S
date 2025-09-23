@@ -68,7 +68,7 @@ class P2SProtocol:
         }
         
         self.blocks[slot] = b1
-        print(f"✅ B₁ created with {len(selected_phts)} PHTs (hidden details)")
+        print(f"B₁ created with {len(selected_phts)} PHTs (hidden details)")
         return b1
     
     def step2_full_execution(self, proposer: str, slot: int) -> Dict[str, Any]:
@@ -99,19 +99,19 @@ class P2SProtocol:
         }
         
         self.blocks[slot] = b2
-        print(f"✅ B₂ created with {len(final_transactions)} transactions (revealed details)")
+        print(f"B₂ created with {len(final_transactions)} transactions (revealed details)")
         return b2
     
     def submit_pht(self, user: str, pht: PHTTransaction) -> bool:
         """Submit PHT to mempool"""
         self.mempool[pht.hash] = pht
-        print(f"📝 {user} submitted PHT: {pht.hash[:8]}...")
+        print(f"{user} submitted PHT: {pht.hash[:8]}...")
         return True
     
     def submit_mt(self, user: str, mt: MTTransaction) -> bool:
         """Submit MT to exposure pool"""
         self.exposure_pool.add(mt)
-        print(f"🔓 {user} submitted MT: {mt.hash[:8]}...")
+        print(f"{user} submitted MT: {mt.hash[:8]}...")
         return True
 
 def create_pht_transaction(sender: str, recipient: str, value: int, 
@@ -159,7 +159,7 @@ def create_mt_transaction(pht: PHTTransaction, recipient: str, value: int,
 
 def demonstrate_p2s():
     """Demonstrate P2S protocol"""
-    print("🚀 P2S Protocol Demonstration")
+    print("P2S Protocol Demonstration")
     print("=" * 40)
     
     # Initialize protocol
@@ -168,10 +168,10 @@ def demonstrate_p2s():
     
     # Step 0: Select proposer
     proposer = protocol.step0_proposer_selection(100)
-    print(f"🎯 Selected proposer: {proposer}")
+    print(f"Selected proposer: {proposer}")
     
     # Step 1: Users submit PHTs
-    print("\n🔒 Step 1: Partial Transaction Commitment")
+    print("\nStep 1: Partial Transaction Commitment")
     users = ["user_1", "user_2", "user_3"]
     phts = []
     
@@ -190,7 +190,7 @@ def demonstrate_p2s():
     b1 = protocol.step1_partial_commitment(proposer, 100)
     
     # Step 2: Users submit MTs
-    print("\n🔓 Step 2: Full Transaction Execution")
+    print("\nStep 2: Full Transaction Execution")
     mts = []
     
     for pht in phts:
@@ -206,12 +206,12 @@ def demonstrate_p2s():
     b2 = protocol.step2_full_execution(proposer, 100)
     
     # Results
-    print(f"\n📊 Results:")
+    print(f"\nResults:")
     print(f"  PHTs submitted: {len(phts)}")
     print(f"  MTs submitted: {len(mts)}")
     print(f"  B₁ transactions: {len(b1['transactions'])}")
     print(f"  B₂ transactions: {len(b2['transactions'])}")
-    print(f"  MEV Protection: ✅ Hidden details in B₁, revealed in B₂")
+    print(f"  MEV Protection: Hidden details in B₁, revealed in B₂")
 
 if __name__ == "__main__":
     demonstrate_p2s()
