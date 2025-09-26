@@ -118,24 +118,43 @@ class P2SProtocol:
         self.mempool: Dict[str, PHTTransaction] = {}
         self.exposure_pool: Set[MTTransaction] = set()
         self.utility_functions = UtilityFunctions()
+        self.proposer_availability: Dict[str, bool] = {v: True for v in validator_set}
         
-    def step0_proposer_selection(self, slot: int) -> str:
+    def step0_proposer_selection(self, slot: int) -> Tuple[str, str]:
         """
-        Step 0: Proposer Selection
-        Randomly select validator P_i via RANDAO two slots ahead
+        Step 0: Proposer Selection via RANDAO
+        Select P1 for B1, and P2 as backup for B2 if P1 goes offline
         """
-        # Simulate RANDAO selection (in practice, this would use actual RANDAO)
+        # RANDAO selection for P1 (two slots ahead)
         random.seed(slot + 42)  # Deterministic for testing
-        proposer = random.choice(self.validator_set)
-        print(f"🎯 Step 0: Selected proposer {proposer} for slot {slot}")
-        return proposer
+        p1 = random.choice(self.validator_set)
+        
+        # RANDAO selection for P2 (backup proposer)
+        random.seed(slot + 43)  # Different seed for P2
+        p2 = random.choice([v for v in self.validator_set if v != p1])
+        
+        print(f"Step 0: RANDAO selected P1={p1}, P2={p2} for slot {slot}")
+        return p1, p2
     
-    def step1_partial_commitment(self, proposer: str, slot: int) -> Block:
+    def check_proposer_availability(self, proposer: str) -> bool:
+        """Check if proposer is available (simulate offline scenarios)"""
+        # Simulate proposer going offline (5% chance)
+        if random.random() < 0.05:
+            self.proposer_availability[proposer] = False
+            print(f"Proposer {proposer} went offline")
+            return False
+        return self.proposer_availability.get(proposer, True)
+    
+    def step1_partial_commitment(self, p1: str, slot: int) -> Block:
         """
         Step 1: Partial Transaction Commitment
-        Proposer constructs B_1 with PHTs
+        P1 constructs B_1 with PHTs
         """
-        print(f"🔒 Step 1: Proposer {proposer} creating B_1 with PHTs")
+        print(f"Step 1: P1={p1} creating B_1 with PHTs")
+        
+        # Check if P1 is available
+        if not self.check_proposer_availability(p1):
+            raise Exception(f"P1 {p1} is offline, cannot create B_1")
         
         # Select PHTs from mempool
         selected_phts = self._select_phts_for_block()
@@ -143,7 +162,7 @@ class P2SProtocol:
         # Create B_1 block
         b1 = Block(
             block_number=slot,
-            proposer=proposer,
+            proposer=p1,
             transactions=selected_phts,
             parent_hash=self._get_last_block_hash(),
             timestamp=time.time(),
@@ -153,15 +172,25 @@ class P2SProtocol:
         # Store block
         self.blocks[slot] = b1
         
-        print(f"✅ B_1 created with {len(selected_phts)} PHTs")
+        print(f"B_1 created with {len(selected_phts)} PHTs")
         return b1
     
-    def step2_full_execution(self, proposer: str, slot: int) -> Block:
+    def step2_full_execution(self, p1: str, p2: str, slot: int) -> Block:
         """
         Step 2: Full Transaction Execution
-        Process MTs and create final B_2 block
+        P1 builds B_2 if available, otherwise P2 takes over
         """
-        print(f"🔓 Step 2: Processing MTs for B_2")
+        print(f"Step 2: Checking proposer availability for B_2")
+        
+        # Check if P1 is still available for B_2
+        if self.check_proposer_availability(p1):
+            # P1 builds both B_1 and B_2
+            proposer_for_b2 = p1
+            print(f"P1={p1} is available, building B_2")
+        else:
+            # P1 went offline, P2 takes over for B_2
+            proposer_for_b2 = p2
+            print(f"P1={p1} went offline, P2={p2} building B_2")
         
         # Get B_1 for reference
         b1 = self.blocks.get(slot)
@@ -177,7 +206,7 @@ class P2SProtocol:
         # Create B_2 block
         b2 = Block(
             block_number=slot,
-            proposer=proposer,
+            proposer=proposer_for_b2,
             transactions=b2_transactions,
             parent_hash=b1.parent_hash,
             timestamp=time.time(),
@@ -187,7 +216,7 @@ class P2SProtocol:
         # Replace B_1 with B_2
         self.blocks[slot] = b2
         
-        print(f"✅ B_2 created with {len(b2_transactions)} transactions")
+        print(f"B_2 created with {len(b2_transactions)} transactions by {proposer_for_b2}")
         return b2
     
     def submit_pht(self, user: str, pht: PHTTransaction) -> bool:

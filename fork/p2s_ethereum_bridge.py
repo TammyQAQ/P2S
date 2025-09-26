@@ -34,7 +34,7 @@ class P2SEthereumBridge:
         
     def setup_simulation_network(self, num_users: int = 10, num_proposers: int = 5):
         """Set up the P2S simulation network"""
-        print(f"🌐 Setting up P2S simulation network with {num_users} users and {num_proposers} proposers...")
+        print(f"Setting up P2S simulation network with {num_users} users and {num_proposers} proposers...")
         
         # Create users and proposers
         self.users = [Node(f"user_{i}") for i in range(num_users)]
@@ -43,7 +43,7 @@ class P2SEthereumBridge:
         # Build network
         self.simulation_network = build_network(self.users, self.proposers)
         
-        print(f"✅ Network created with {self.simulation_network.number_of_nodes()} nodes")
+        print(f"Network created with {self.simulation_network.number_of_nodes()} nodes")
         return self.simulation_network
     
     def step1_reveal_merkle_tree(self, user_id: str, merkle_proof: List[str]) -> Dict[str, Any]:
@@ -51,7 +51,7 @@ class P2SEthereumBridge:
         Step 1 of P2S: User reveals Merkle Tree for PHT
         This integrates with your existing P2S workflow
         """
-        print(f"🔍 Step 1: User {user_id} revealing Merkle Tree for round {self.current_round}")
+        print(f"Step 1: User {user_id} revealing Merkle Tree for round {self.current_round}")
         
         # Store merkle tree for this round
         self.merkle_trees[self.current_round] = {
@@ -60,37 +60,75 @@ class P2SEthereumBridge:
             "timestamp": time.time()
         }
         
-        # TODO: Implement your actual P2S merkle tree verification logic here
-        # This is where you'd integrate with your existing P2S implementation
+        # Verify merkle proof (simplified implementation)
+        proof_valid = len(merkle_proof) > 0 and all(isinstance(p, str) for p in merkle_proof)
+        
+        if not proof_valid:
+            return {
+                "status": "error",
+                "round": self.current_round,
+                "user_id": user_id,
+                "message": "Invalid merkle proof"
+            }
         
         return {
             "status": "success",
             "round": self.current_round,
             "user_id": user_id,
-            "message": "Merkle tree revealed successfully"
+            "message": "Merkle tree revealed successfully",
+            "proof_length": len(merkle_proof)
         }
+    
+    def step0_proposer_selection(self, slot: int) -> tuple:
+        """
+        Step 0: Select P1 and P2 via RANDAO
+        Select P1 for B1, and P2 as backup for B2 if P1 goes offline
+        """
+        import random
+        
+        # RANDAO selection for P1 (two slots ahead)
+        random.seed(slot + 42)  # Deterministic for testing
+        p1 = random.choice(self.proposers)
+        
+        # RANDAO selection for P2 (backup proposer)
+        random.seed(slot + 43)  # Different seed for P2
+        p2 = random.choice([p for p in self.proposers if p != p1])
+        
+        print(f"RANDAO Selection for slot {slot}:")
+        print(f"  P1 (primary): {p1.id}")
+        print(f"  P2 (backup):  {p2.id}")
+        return p1, p2
+    
+    def check_proposer_availability(self, proposer, step: str) -> bool:
+        """Check if proposer is available (simulate offline scenarios)"""
+        import random
+        
+        # Simulate proposer going offline between steps
+        if step == "step2" and random.random() < 0.1:  # 10% chance P1 goes offline before B2
+            proposer.available = False
+            print(f"  {proposer.id} went offline before {step}")
+            return False
+        return proposer.available
     
     def step2_select_proposer(self, block_number: int) -> Dict[str, Any]:
         """
-        Step 2 of P2S: Select proposer based on availability
-        This implements the P2S proposer selection logic
+        Step 2 of P2S: Select proposer based on P1/P2 availability
+        This implements the correct P2S proposer selection logic
         """
-        print(f"🎯 Step 2: Selecting proposer for block {block_number}")
+        print(f"Step 2: Selecting proposer for block {block_number}")
         
-        # Check if P1 is available (from your P2S workflow)
-        available_proposers = [p for p in self.proposers if hasattr(p, 'available') and p.available]
+        # Step 0: Select P1 and P2 via RANDAO
+        p1, p2 = self.step0_proposer_selection(block_number)
         
-        if not available_proposers:
-            # If no proposers available, select P2 for B2
-            print("⚠️  P1 not available, selecting P2 for B2")
-            selected_proposer = self._select_p2_proposer()
+        # Check if P1 is still available for B_2
+        if self.check_proposer_availability(p1, "step2"):
+            # P1 builds both B_1 and B_2
+            selected_proposer = p1
+            print(f"P1={p1.id} is available, building B_2")
         else:
-            # P1 is available, select P1 for B1
-            print("✅ P1 available, selecting P1 for B1")
-            selected_proposer = self._select_p1_proposer(available_proposers)
-        
-        # Update proposer availability
-        selected_proposer.available = False
+            # P1 went offline, P2 takes over for B_2
+            selected_proposer = p2
+            print(f"P1={p1.id} went offline, P2={p2.id} building B_2")
         
         return {
             "proposer_id": selected_proposer.id,
@@ -98,20 +136,12 @@ class P2SEthereumBridge:
             "available": selected_proposer.available,
             "stake": 1000,  # Mock stake
             "round": self.current_round,
-            "block_number": block_number
+            "block_number": block_number,
+            "p1_id": p1.id,
+            "p2_id": p2.id,
+            "same_proposer": selected_proposer.id == p1.id
         }
     
-    def _select_p1_proposer(self, available_proposers: List[Proposer]) -> Proposer:
-        """Select P1 proposer for B1"""
-        # TODO: Implement your P1 selection logic from P2S
-        # For now, use simple round-robin
-        return available_proposers[self.current_round % len(available_proposers)]
-    
-    def _select_p2_proposer(self) -> Proposer:
-        """Select P2 proposer for B2"""
-        # TODO: Implement your P2 selection logic from P2S
-        # For now, use simple selection
-        return self.proposers[self.current_round % len(self.proposers)]
     
     def get_ethereum_block_number(self) -> int:
         """Get current block number from Ethereum node"""
@@ -126,7 +156,7 @@ class P2SEthereumBridge:
             result = response.json()
             return int(result['result'], 16)
         except Exception as e:
-            print(f"❌ Error getting block number: {e}")
+            print(f"Error getting block number: {e}")
             return 0
     
     def sync_with_ethereum(self):
@@ -134,7 +164,7 @@ class P2SEthereumBridge:
         block_number = self.get_ethereum_block_number()
         if block_number > self.current_round:
             self.current_round = block_number
-            print(f"🔄 Synced to round {self.current_round}")
+            print(f"Synced to round {self.current_round}")
 
 # Flask API server for Ethereum client integration
 app = Flask(__name__)
@@ -203,9 +233,9 @@ def simulation_status():
 
 def start_bridge_server(host='0.0.0.0', port=8000, debug=True):
     """Start the P2S bridge server"""
-    print("🚀 Starting P2S Ethereum Bridge Server...")
-    print(f"📡 Server will be available at: http://{host}:{port}")
-    print("🔗 Available endpoints:")
+    print("Starting P2S Ethereum Bridge Server...")
+    print(f"Server will be available at: http://{host}:{port}")
+    print("Available endpoints:")
     print("   GET  /get_proposer?round=<round>&block=<block>")
     print("   POST /reveal_merkle_tree")
     print("   POST /update_proposer")

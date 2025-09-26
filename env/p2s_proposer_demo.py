@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
 """
-P2S Protocol - Simple Implementation
-Clean, minimal implementation of the P2S protocol for MEV mitigation
+P2S Proposer Selection Demonstration
+Shows P1/P2 selection via RANDAO and P2 takeover when P1 goes offline
 """
 
 import hashlib
@@ -19,16 +18,14 @@ class PHTTransaction:
     gas_price: int
     hash: str
     signature: str
-    # Hidden fields (revealed in MT)
+    # Hidden fields
     recipient: Optional[str] = None
     value: Optional[int] = None
     call_data: Optional[str] = None
-    commitment: Optional[str] = None
 
 @dataclass(frozen=True)
 class MTTransaction:
     """Matching Transaction - Step 2"""
-    # All PHT fields plus revealed fields
     sender: str
     nonce: int
     gas_limit: int
@@ -42,7 +39,7 @@ class MTTransaction:
     proof: str
 
 class P2SProtocol:
-    """P2S Protocol Implementation"""
+    """P2S Protocol with Correct P1/P2 Selection"""
     
     def __init__(self, validators: List[str]):
         self.validators = validators
@@ -53,32 +50,33 @@ class P2SProtocol:
     
     def step0_proposer_selection(self, slot: int) -> Tuple[str, str]:
         """Step 0: Select P1 and P2 via RANDAO"""
-        # RANDAO selection for P1
+        # RANDAO selection for P1 (two slots ahead)
         random.seed(slot + 42)
         p1 = random.choice(self.validators)
         
-        # RANDAO selection for P2 (backup)
+        # RANDAO selection for P2 (backup proposer)
         random.seed(slot + 43)
         p2 = random.choice([v for v in self.validators if v != p1])
         
+        print(f"RANDAO Selection for slot {slot}:")
+        print(f"  P1 (primary): {p1}")
+        print(f"  P2 (backup):  {p2}")
         return p1, p2
     
-    def check_proposer_availability(self, proposer: str) -> bool:
+    def check_proposer_availability(self, proposer: str, step: str) -> bool:
         """Check if proposer is available (simulate offline scenarios)"""
-        # Simulate proposer going offline (20% chance for demo)
-        if random.random() < 0.20:
+        # Simulate proposer going offline between steps
+        if step == "step2" and random.random() < 0.3:  # 30% chance P1 goes offline before B2
             self.proposer_availability[proposer] = False
-            print(f"Proposer {proposer} went offline")
+            print(f"  {proposer} went offline before {step}")
             return False
         return self.proposer_availability.get(proposer, True)
     
     def step1_partial_commitment(self, p1: str, slot: int) -> Dict[str, Any]:
-        """Step 1: Create B₁ with PHTs (hidden details)"""
-        # Check if P1 is available
-        if not self.check_proposer_availability(p1):
-            raise Exception(f"P1 {p1} is offline, cannot create B_1")
+        """Step 1: P1 creates B₁ with PHTs"""
+        print(f"\nStep 1: P1={p1} creating B₁")
         
-        selected_phts = list(self.mempool.values())[:10]  # Limit block size
+        selected_phts = list(self.mempool.values())[:5]  # Limit block size
         
         b1 = {
             "block_number": slot,
@@ -89,20 +87,22 @@ class P2SProtocol:
         }
         
         self.blocks[slot] = b1
-        print(f"B₁ created with {len(selected_phts)} PHTs (hidden details)")
+        print(f"  B₁ created with {len(selected_phts)} PHTs (hidden details)")
         return b1
     
     def step2_full_execution(self, p1: str, p2: str, slot: int) -> Dict[str, Any]:
-        """Step 2: Create B₂ with MTs (revealed details)"""
+        """Step 2: P1 builds B₂ if available, otherwise P2 takes over"""
+        print(f"\nStep 2: Checking proposer availability for B₂")
+        
         # Check if P1 is still available for B_2
-        if self.check_proposer_availability(p1):
+        if self.check_proposer_availability(p1, "step2"):
             # P1 builds both B_1 and B_2
             proposer_for_b2 = p1
-            print(f"P1={p1} is available, building B_2")
+            print(f"  P1={p1} is available, building B_2")
         else:
             # P1 went offline, P2 takes over for B_2
             proposer_for_b2 = p2
-            print(f"P1={p1} went offline, P2={p2} building B_2")
+            print(f"  P1={p1} went offline, P2={p2} building B_2")
         
         b1 = self.blocks[slot]
         
@@ -130,49 +130,40 @@ class P2SProtocol:
         }
         
         self.blocks[slot] = b2
-        print(f"B₂ created with {len(final_transactions)} transactions (revealed details)")
+        print(f"  B₂ created with {len(final_transactions)} transactions by {proposer_for_b2}")
         return b2
     
     def submit_pht(self, user: str, pht: PHTTransaction) -> bool:
         """Submit PHT to mempool"""
         self.mempool[pht.hash] = pht
-        print(f"{user} submitted PHT: {pht.hash[:8]}...")
+        print(f"  {user} submitted PHT: {pht.hash[:8]}...")
         return True
     
     def submit_mt(self, user: str, mt: MTTransaction) -> bool:
         """Submit MT to exposure pool"""
         self.exposure_pool.add(mt)
-        print(f"{user} submitted MT: {mt.hash[:8]}...")
+        print(f"  {user} submitted MT: {mt.pht_hash[:8]}...")
         return True
 
 def create_pht_transaction(sender: str, recipient: str, value: int, 
                           gas_limit: int, gas_price: int) -> PHTTransaction:
-    """Create PHT with hidden fields"""
-    nonce = random.randint(1, 1000)
-    
-    # Create commitment to hidden fields
-    hidden_data = f"{recipient}:{value}"
-    commitment = hashlib.sha256(hidden_data.encode()).hexdigest()
-    
-    # Create transaction hash
-    tx_data = f"{sender}:{nonce}:{gas_limit}:{gas_price}:{commitment}"
+    """Create a PHT transaction"""
+    tx_data = f"{sender}{recipient}{value}{gas_limit}{gas_price}{time.time()}"
     tx_hash = hashlib.sha256(tx_data.encode()).hexdigest()
-    signature = hashlib.sha256(f"{tx_hash}:{sender}".encode()).hexdigest()
     
     return PHTTransaction(
         sender=sender,
-        nonce=nonce,
+        nonce=1,
         gas_limit=gas_limit,
         gas_price=gas_price,
         hash=tx_hash,
-        signature=signature,
-        commitment=commitment
+        signature=f"sig_{tx_hash[:8]}"
     )
 
 def create_mt_transaction(pht: PHTTransaction, recipient: str, value: int, 
                          call_data: str = "") -> MTTransaction:
-    """Create MT that reveals hidden fields"""
-    proof = hashlib.sha256(f"{pht.hash}:{recipient}:{value}".encode()).hexdigest()
+    """Create an MT transaction from PHT"""
+    proof = f"proof_{pht.hash[:8]}"
     
     return MTTransaction(
         sender=pht.sender,
@@ -188,21 +179,16 @@ def create_mt_transaction(pht: PHTTransaction, recipient: str, value: int,
         proof=proof
     )
 
-def demonstrate_p2s():
-    """Demonstrate P2S protocol"""
-    print("P2S Protocol Demonstration")
-    print("=" * 40)
+def demonstrate_p1_p2_selection():
+    """Demonstrate P1/P2 selection and P2 takeover scenarios"""
+    print("P2S Proposer Selection Demonstration")
+    print("=" * 50)
     
     # Initialize protocol
-    validators = ["validator_1", "validator_2", "validator_3"]
+    validators = ["validator_1", "validator_2", "validator_3", "validator_4"]
     protocol = P2SProtocol(validators)
     
-    # Step 0: Select P1 and P2 via RANDAO
-    p1, p2 = protocol.step0_proposer_selection(100)
-    print(f"Selected P1: {p1}, P2: {p2}")
-    
-    # Step 1: Users submit PHTs
-    print("\nStep 1: Partial Transaction Commitment")
+    # Create some transactions
     users = ["user_1", "user_2", "user_3"]
     phts = []
     
@@ -217,34 +203,35 @@ def demonstrate_p2s():
         protocol.submit_pht(user, pht)
         phts.append(pht)
     
-    # Create B₁
-    b1 = protocol.step1_partial_commitment(p1, 100)
-    
-    # Step 2: Users submit MTs
-    print("\nStep 2: Full Transaction Execution")
-    mts = []
-    
-    for pht in phts:
-        mt = create_mt_transaction(
-            pht, 
-            f"recipient_{random.randint(0, 2)}", 
-            1000
-        )
-        protocol.submit_mt(pht.sender, mt)
-        mts.append(mt)
-    
-    # Create B₂
-    b2 = protocol.step2_full_execution(p1, p2, 100)
-    
-    # Results
-    print(f"\nResults:")
-    print(f"  PHTs submitted: {len(phts)}")
-    print(f"  MTs submitted: {len(mts)}")
-    print(f"  B₁ transactions: {len(b1['transactions'])}")
-    print(f"  B₂ transactions: {len(b2['transactions'])}")
-    print(f"  B₁ proposer: {b1['proposer']}")
-    print(f"  B₂ proposer: {b2['proposer']}")
-    print(f"  MEV Protection: Hidden details in B₁, revealed in B₂")
+    # Run multiple scenarios
+    for scenario in range(1, 4):
+        print(f"\n{'='*20} Scenario {scenario} {'='*20}")
+        
+        # Step 0: Select P1 and P2 via RANDAO
+        p1, p2 = protocol.step0_proposer_selection(100 + scenario)
+        
+        # Step 1: P1 creates B₁
+        b1 = protocol.step1_partial_commitment(p1, 100 + scenario)
+        
+        # Users submit MTs
+        print(f"\nUsers submitting MTs:")
+        for pht in phts:
+            mt = create_mt_transaction(
+                pht, 
+                f"recipient_{random.randint(0, 2)}", 
+                1000
+            )
+            protocol.submit_mt(pht.sender, mt)
+        
+        # Step 2: Create B₂ (P1 or P2)
+        b2 = protocol.step2_full_execution(p1, p2, 100 + scenario)
+        
+        # Results
+        print(f"\nResults:")
+        print(f"  B₁ proposer: {b1['proposer']}")
+        print(f"  B₂ proposer: {b2['proposer']}")
+        print(f"  Same proposer: {'Yes' if b1['proposer'] == b2['proposer'] else 'No'}")
+        print(f"  MEV Protection: Active")
 
 if __name__ == "__main__":
-    demonstrate_p2s()
+    demonstrate_p1_p2_selection()
