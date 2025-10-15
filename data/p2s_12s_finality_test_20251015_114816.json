@@ -1,0 +1,234 @@
+{
+  "b1_timing": [
+    {
+      "transaction_id": 1,
+      "start_time": 1760525277.788688,
+      "end_time": 1760525278.808799,
+      "total_latency": 1.020111083984375,
+      "pht_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:47:58.808811"
+    },
+    {
+      "transaction_id": 2,
+      "start_time": 1760525278.808904,
+      "end_time": 1760525279.824884,
+      "total_latency": 1.0159800052642822,
+      "pht_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:47:59.824897"
+    },
+    {
+      "transaction_id": 3,
+      "start_time": 1760525279.824939,
+      "end_time": 1760525280.845112,
+      "total_latency": 1.0201730728149414,
+      "pht_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:00.845121"
+    },
+    {
+      "transaction_id": 4,
+      "start_time": 1760525280.8451788,
+      "end_time": 1760525281.8652642,
+      "total_latency": 1.020085334777832,
+      "pht_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:01.865272"
+    },
+    {
+      "transaction_id": 5,
+      "start_time": 1760525281.8653262,
+      "end_time": 1760525282.882605,
+      "total_latency": 1.0172789096832275,
+      "pht_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:02.882619"
+    }
+  ],
+  "b2_timing": [
+    {
+      "transaction_id": 1,
+      "start_time": 1760525282.882689,
+      "end_time": 1760525283.897969,
+      "total_latency": 1.01528000831604,
+      "mt_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:03.897975"
+    },
+    {
+      "transaction_id": 2,
+      "start_time": 1760525283.89801,
+      "end_time": 1760525284.913815,
+      "total_latency": 1.0158050060272217,
+      "mt_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:04.913823"
+    },
+    {
+      "transaction_id": 3,
+      "start_time": 1760525284.913871,
+      "end_time": 1760525285.925644,
+      "total_latency": 1.011772871017456,
+      "mt_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:05.925650"
+    },
+    {
+      "transaction_id": 4,
+      "start_time": 1760525285.925678,
+      "end_time": 1760525286.9457521,
+      "total_latency": 1.0200741291046143,
+      "mt_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:06.945759"
+    },
+    {
+      "transaction_id": 5,
+      "start_time": 1760525286.945794,
+      "end_time": 1760525287.961149,
+      "total_latency": 1.015354871749878,
+      "mt_creation": 0.05,
+      "network_propagation": 0.3,
+      "block_proposal": 0.4,
+      "consensus_validation": 0.25,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:07.961159"
+    }
+  ],
+  "total_timing": [],
+  "network_overhead": [],
+  "cryptographic_overhead": [],
+  "consensus_overhead": [],
+  "metadata": {
+    "test_start": "2025-10-15T11:47:57.788517",
+    "target_finality": 12.0,
+    "b1_target": 6.0,
+    "b2_target": 6.0,
+    "test_duration": 19.043534994125366,
+    "total_transactions": 10
+  },
+  "parallel_processing": {
+    "total_time": 2.044538974761963,
+    "sequential_time": 4.063760757446289,
+    "parallel_efficiency": 198.7617163384922,
+    "b1_results": [
+      {
+        "transaction_id": 1,
+        "start_time": 1760525287.9710798,
+        "end_time": 1760525288.989558,
+        "total_latency": 1.0184781551361084,
+        "pht_creation": 0.05,
+        "network_propagation": 0.3,
+        "block_proposal": 0.4,
+        "consensus_validation": 0.25,
+        "target_met": true,
+        "timestamp": "2025-10-15T11:48:08.989567"
+      },
+      {
+        "transaction_id": 2,
+        "start_time": 1760525288.98963,
+        "end_time": 1760525290.005569,
+        "total_latency": 1.0159389972686768,
+        "pht_creation": 0.05,
+        "network_propagation": 0.3,
+        "block_proposal": 0.4,
+        "consensus_validation": 0.25,
+        "target_met": true,
+        "timestamp": "2025-10-15T11:48:10.005573"
+      }
+    ],
+    "b2_results": [
+      {
+        "transaction_id": 1,
+        "start_time": 1760525287.971179,
+        "end_time": 1760525288.9896479,
+        "total_latency": 1.0184688568115234,
+        "mt_creation": 0.05,
+        "network_propagation": 0.3,
+        "block_proposal": 0.4,
+        "consensus_validation": 0.25,
+        "target_met": true,
+        "timestamp": "2025-10-15T11:48:08.989649"
+      },
+      {
+        "transaction_id": 2,
+        "start_time": 1760525288.989664,
+        "end_time": 1760525290.0005388,
+        "total_latency": 1.0108747482299805,
+        "mt_creation": 0.05,
+        "network_propagation": 0.3,
+        "block_proposal": 0.4,
+        "consensus_validation": 0.25,
+        "target_met": true,
+        "timestamp": "2025-10-15T11:48:10.000548"
+      }
+    ],
+    "timestamp": "2025-10-15T11:48:10.005787"
+  },
+  "network_congestion": {
+    "10%": {
+      "congestion_level": 0.1,
+      "congestion_delay": 0.2,
+      "b1_time": 0.2526249885559082,
+      "b2_time": 0.2550318241119385,
+      "total_time": 0.5076568126678467,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:10.513484"
+    },
+    "30%": {
+      "congestion_level": 0.3,
+      "congestion_delay": 0.6,
+      "b1_time": 0.6550159454345703,
+      "b2_time": 0.6550168991088867,
+      "total_time": 1.3100368976593018,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:11.823559"
+    },
+    "50%": {
+      "congestion_level": 0.5,
+      "congestion_delay": 1.0,
+      "b1_time": 1.0550389289855957,
+      "b2_time": 1.0516209602355957,
+      "total_time": 2.106663942337036,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:13.930296"
+    },
+    "70%": {
+      "congestion_level": 0.7,
+      "congestion_delay": 1.4,
+      "b1_time": 1.4515089988708496,
+      "b2_time": 1.450277328491211,
+      "total_time": 2.9017882347106934,
+      "target_met": true,
+      "timestamp": "2025-10-15T11:48:16.832170"
+    }
+  }
+}
