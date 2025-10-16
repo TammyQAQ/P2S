@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-P2S Implementation Test Script
-Tests the P2S consensus implementation without requiring full Ethereum setup
+Implementation Test Script
+Tests the consensus implementation without requiring full Ethereum setup
 """
 
 import subprocess
@@ -45,7 +45,7 @@ def test_go_installation():
     
     return True
 
-def test_p2s_implementation():
+def test_implementation():
     """Test P2S implementation"""
     print("\n[TEST] Testing P2S Implementation")
     print("=" * 40)
@@ -69,7 +69,7 @@ def test_p2s_implementation():
     
     return True
 
-def test_p2s_tests():
+def test_tests():
     """Test P2S test suite"""
     print("\n[TEST] Testing P2S Test Suite")
     print("=" * 40)
@@ -158,15 +158,15 @@ def test_documentation():
 
 def main():
     """Main test function"""
-    print("[START] P2S Implementation Test Suite")
+    print("[START] Implementation Test Suite")
     print("=" * 50)
     
     tests = [
         ("Go Installation", test_go_installation),
         ("Directory Structure", test_directory_structure),
         ("Documentation", test_documentation),
-        ("P2S Implementation", test_p2s_implementation),
-        ("P2S Tests", test_p2s_tests),
+        ("Implementation", test_implementation),
+        ("Tests", test_tests),
         ("Deployment Script", test_deployment_script),
     ]
     

@@ -12,8 +12,8 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 )
 
-// P2SConsensus implements the P2S (Proposer in 2 Steps) consensus mechanism
-type P2SConsensus struct {
+// Consensus implements the P2S (Proposer in 2 Steps) consensus mechanism
+type Consensus struct {
 	// Ethereum consensus engine
 	ethConsensus consensus.Engine
 	
@@ -24,17 +24,17 @@ type P2SConsensus struct {
 	mevDetector  *MEVDetector
 	
 	// Configuration
-	config *P2SConfig
+	config *Config
 	
 	// Caching
-	cache *P2SCache
+	cache *Cache
 	
 	// Thread safety
 	mu sync.RWMutex
 }
 
-// P2SConfig contains P2S-specific configuration
-type P2SConfig struct {
+// Config contains P2S-specific configuration
+type Config struct {
 	// Block time configuration
 	B1BlockTime time.Duration
 	B2BlockTime time.Duration
@@ -52,9 +52,9 @@ type P2SConfig struct {
 	ProofSystem      string
 }
 
-// DefaultP2SConfig returns default P2S configuration
-func DefaultP2SConfig() *P2SConfig {
-	return &P2SConfig{
+// DefaultConfig returns default P2S configuration
+func DefaultConfig() *Config {
+	return &Config{
 		B1BlockTime:      12 * time.Second,
 		B2BlockTime:      12 * time.Second,
 		MinMEVScore:      0.7,
@@ -66,13 +66,13 @@ func DefaultP2SConfig() *P2SConfig {
 	}
 }
 
-// NewP2SConsensus creates a new P2S consensus engine
-func NewP2SConsensus(ethConsensus consensus.Engine, config *P2SConfig) *P2SConsensus {
+// NewConsensus creates a new P2S consensus engine
+func NewConsensus(ethConsensus consensus.Engine, config *Config) *Consensus {
 	if config == nil {
-		config = DefaultP2SConfig()
+		config = DefaultConfig()
 	}
 	
-	return &P2SConsensus{
+	return &Consensus{
 		ethConsensus: ethConsensus,
 		phtManager:   NewPHTManager(config),
 		mtManager:    NewMTManager(config),

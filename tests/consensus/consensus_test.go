@@ -9,10 +9,10 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 )
 
-func TestP2SConsensus(t *testing.T) {
+func TestConsensus(t *testing.T) {
 	// Create P2S consensus engine
-	config := DefaultP2SConfig()
-	consensus := NewP2SConsensus(nil, config)
+	config := DefaultConfig()
+	consensus := NewConsensus(nil, config)
 	
 	// Test basic functionality
 	if consensus == nil {

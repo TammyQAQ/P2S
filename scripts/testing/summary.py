@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-P2S Test Results Summary
-Provides a comprehensive summary of our P2S implementation tests
+Test Results Summary
+Provides a comprehensive summary of our implementation tests
 """
 
 import os
@@ -10,10 +10,10 @@ from pathlib import Path
 
 def analyze_test_file():
     """Analyze the test file content"""
-    print("[TEST] P2S Test Analysis")
+    print("[TEST] Test Analysis")
     print("=" * 30)
     
-    test_file = "tests/consensus/p2s_test.go"
+    test_file = "tests/consensus/consensus_test.go"
     if not os.path.exists(test_file):
         print("[FAILED] Test file not found")
         return False
@@ -180,7 +180,7 @@ def generate_test_summary():
     print(f"[STATS] Overall Results: {passed}/{total} checks passed")
     
     if passed == total:
-        print("[COMPLETE] P2S Implementation is READY for testnet deployment!")
+        print("[COMPLETE] Implementation is READY for testnet deployment!")
         print("\n[START] Next Steps:")
         print("   1. Install Go 1.21+")
         print("   2. Run: ./scripts/deploy/deploy_testnet.sh start")

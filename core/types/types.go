@@ -7,8 +7,8 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 )
 
-// P2STransaction represents a P2S transaction that can be either PHT or MT
-type P2STransaction interface {
+// Transaction represents a P2S transaction that can be either PHT or MT
+type Transaction interface {
 	GetSender() common.Address
 	GetGasPrice() *big.Int
 	GetHash() common.Hash
@@ -55,8 +55,8 @@ type MTTransaction struct {
 	TxHash common.Hash `json:"txHash"`
 }
 
-// P2SBlock represents a P2S block that can be either B1 or B2
-type P2SBlock interface {
+// Block represents a P2S block that can be either B1 or B2
+type Block interface {
 	GetBlockType() uint8
 	GetHeader() *types.Header
 	GetTransactionCount() int
@@ -89,8 +89,8 @@ type B2Block struct {
 	BlockHash       common.Hash        `json:"blockHash"`
 }
 
-// P2SBlockHeader extends Ethereum's block header with P2S-specific fields
-type P2SBlockHeader struct {
+// BlockHeader extends Ethereum's block header with P2S-specific fields
+type BlockHeader struct {
 	*types.Header
 	BlockType    uint8   `json:"blockType"`    // 1 for B1, 2 for B2
 	MEVScore     float64 `json:"mevScore"`     // MEV protection score
@@ -142,14 +142,14 @@ func DefaultP2SConfig() *P2SConfig {
 }
 
 // P2STransactionPool represents a pool of P2S transactions
-type P2STransactionPool struct {
+type TransactionPool struct {
 	phts map[common.Hash]*PHTTransaction
 	mts  map[common.Hash]*MTTransaction
 }
 
-// NewP2STransactionPool creates a new P2S transaction pool
-func NewP2STransactionPool() *P2STransactionPool {
-	return &P2STransactionPool{
+// NewTransactionPool creates a new P2S transaction pool
+func NewTransactionPool() *TransactionPool {
+	return &TransactionPool{
 		phts: make(map[common.Hash]*PHTTransaction),
 		mts:  make(map[common.Hash]*MTTransaction),
 	}
@@ -221,15 +221,15 @@ func (p *P2STransactionPool) Clear() {
 	p.mts = make(map[common.Hash]*MTTransaction)
 }
 
-// P2SBlockChain represents a blockchain with P2S blocks
-type P2SBlockChain struct {
+// Blockchain represents a blockchain with P2S blocks
+type Blockchain struct {
 	b1Blocks map[common.Hash]*B1Block
 	b2Blocks map[common.Hash]*B2Block
 }
 
-// NewP2SBlockChain creates a new P2S blockchain
-func NewP2SBlockChain() *P2SBlockChain {
-	return &P2SBlockChain{
+// NewBlockchain creates a new P2S blockchain
+func NewBlockchain() *Blockchain {
+	return &Blockchain{
 		b1Blocks: make(map[common.Hash]*B1Block),
 		b2Blocks: make(map[common.Hash]*B2Block),
 	}

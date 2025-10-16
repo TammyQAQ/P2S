@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-P2S Go Code Validation Script
+Go Code Validation Script
 Validates Go code structure and syntax without requiring Go installation
 """
 
@@ -238,7 +238,7 @@ def check_imports():
 
 def main():
     """Main validation function"""
-    print("[CHECK] P2S Go Code Validation Suite")
+    print("[CHECK] Code Validation Suite")
     print("=" * 50)
     
     # Change to the project directory
