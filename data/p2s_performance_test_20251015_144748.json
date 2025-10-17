@@ -1,0 +1,710 @@
+{
+  "p2s_raw_data": [
+    {
+      "transaction_id": 1,
+      "total_start_time": 1760536042.634861,
+      "total_end_time": 1760536044.2868962,
+      "total_duration": 1.6520352363586426,
+      "pht_creation": {
+        "start_time": 1760536042.634861,
+        "end_time": 1760536042.732547,
+        "duration": 0.0976860523223877,
+        "commitment_time": 0.06744460748575597,
+        "nonce_time": 0.020128990230877893
+      },
+      "b1_block": {
+        "start_time": 1760536042.732558,
+        "end_time": 1760536043.366814,
+        "duration": 0.6342558860778809,
+        "selection_time": 0.003363216559019295,
+        "construction_time": 0.014587869802576682,
+        "propagation_time": 0.5894233755663913,
+        "validation_time": 0.01761319197492874,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "mt_creation": {
+        "start_time": 1760536043.366822,
+        "end_time": 1760536043.523721,
+        "duration": 0.15689897537231445,
+        "proof_time": 0.09654258382083133,
+        "verification_time": 0.050285174514615456
+      },
+      "b2_block": {
+        "start_time": 1760536043.523731,
+        "end_time": 1760536044.28689,
+        "duration": 0.7631590366363525,
+        "selection_time": 0.002080669073393819,
+        "construction_time": 0.01743858017058996,
+        "propagation_time": 0.7139733226969285,
+        "validation_time": 0.017265551343313274,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "tx_complexity": 1.7396882190898317,
+      "network_congestion": 0.3,
+      "timestamp": "2025-10-15T14:47:24.286904"
+    },
+    {
+      "transaction_id": 2,
+      "total_start_time": 1760536044.287012,
+      "total_end_time": 1760536044.758076,
+      "total_duration": 0.47106385231018066,
+      "pht_creation": {
+        "start_time": 1760536044.2870138,
+        "end_time": 1760536044.335249,
+        "duration": 0.048235177993774414,
+        "commitment_time": 0.039728084970152004,
+        "nonce_time": 0.006412569658732193
+      },
+      "b1_block": {
+        "start_time": 1760536044.335256,
+        "end_time": 1760536044.515546,
+        "duration": 0.18028998374938965,
+        "selection_time": 0.0035726319330104967,
+        "construction_time": 0.011437706853390794,
+        "propagation_time": 0.13832515412242602,
+        "validation_time": 0.014473911902678166,
+        "block_size": 100,
+        "network_congestion": 0.0
+      },
+      "mt_creation": {
+        "start_time": 1760536044.515554,
+        "end_time": 1760536044.631995,
+        "duration": 0.11644101142883301,
+        "proof_time": 0.07671718324688181,
+        "verification_time": 0.037642663979932094
+      },
+      "b2_block": {
+        "start_time": 1760536044.632004,
+        "end_time": 1760536044.758045,
+        "duration": 0.12604093551635742,
+        "selection_time": 0.0033384358213348776,
+        "construction_time": 0.0127194153742659,
+        "propagation_time": 0.0860991203777874,
+        "validation_time": 0.011912801283298007,
+        "block_size": 100,
+        "network_congestion": 0.0
+      },
+      "tx_complexity": 1.154838656854512,
+      "network_congestion": 0.0,
+      "timestamp": "2025-10-15T14:47:24.758081"
+    },
+    {
+      "transaction_id": 3,
+      "total_start_time": 1760536044.758156,
+      "total_end_time": 1760536046.099605,
+      "total_duration": 1.3414490222930908,
+      "pht_creation": {
+        "start_time": 1760536044.758158,
+        "end_time": 1760536044.8329659,
+        "duration": 0.07480788230895996,
+        "commitment_time": 0.045190224327424935,
+        "nonce_time": 0.019891835724136935
+      },
+      "b1_block": {
+        "start_time": 1760536044.832973,
+        "end_time": 1760536045.617641,
+        "duration": 0.78466796875,
+        "selection_time": 0.019045393752318104,
+        "construction_time": 0.022753286692245925,
+        "propagation_time": 0.7172045329902291,
+        "validation_time": 0.008617582117903595,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "mt_creation": {
+        "start_time": 1760536045.6176481,
+        "end_time": 1760536045.725302,
+        "duration": 0.10765385627746582,
+        "proof_time": 0.0629558276834868,
+        "verification_time": 0.03462292445800958
+      },
+      "b2_block": {
+        "start_time": 1760536045.725315,
+        "end_time": 1760536046.0995991,
+        "duration": 0.374284029006958,
+        "selection_time": 0.014941224276348941,
+        "construction_time": 0.02362263170055552,
+        "propagation_time": 0.3048394665297387,
+        "validation_time": 0.01954827020593114,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "tx_complexity": 1.0216519694760722,
+      "network_congestion": 0.3,
+      "timestamp": "2025-10-15T14:47:26.099608"
+    },
+    {
+      "transaction_id": 4,
+      "total_start_time": 1760536046.099665,
+      "total_end_time": 1760536048.607342,
+      "total_duration": 2.5076770782470703,
+      "pht_creation": {
+        "start_time": 1760536046.099665,
+        "end_time": 1760536046.173747,
+        "duration": 0.0740821361541748,
+        "commitment_time": 0.05414640501620825,
+        "nonce_time": 0.01465580759804302
+      },
+      "b1_block": {
+        "start_time": 1760536046.173758,
+        "end_time": 1760536047.541676,
+        "duration": 1.3679180145263672,
+        "selection_time": 0.012616220613459085,
+        "construction_time": 0.025592168490053187,
+        "propagation_time": 1.3001327458797096,
+        "validation_time": 0.01351531339911603,
+        "block_size": 100,
+        "network_congestion": 0.7
+      },
+      "mt_creation": {
+        "start_time": 1760536047.5416892,
+        "end_time": 1760536047.67474,
+        "duration": 0.13305091857910156,
+        "proof_time": 0.08596640590419095,
+        "verification_time": 0.04046179397667972
+      },
+      "b2_block": {
+        "start_time": 1760536047.674772,
+        "end_time": 1760536048.607331,
+        "duration": 0.9325590133666992,
+        "selection_time": 0.014360201284159341,
+        "construction_time": 0.027688196397337966,
+        "propagation_time": 0.8733341142572004,
+        "validation_time": 0.004343393378298779,
+        "block_size": 100,
+        "network_congestion": 0.7
+      },
+      "tx_complexity": 1.4598808046382372,
+      "network_congestion": 0.7,
+      "timestamp": "2025-10-15T14:47:28.607375"
+    },
+    {
+      "transaction_id": 5,
+      "total_start_time": 1760536048.60747,
+      "total_end_time": 1760536049.057282,
+      "total_duration": 0.4498119354248047,
+      "pht_creation": {
+        "start_time": 1760536048.6074722,
+        "end_time": 1760536048.651051,
+        "duration": 0.0435788631439209,
+        "commitment_time": 0.023552917878535654,
+        "nonce_time": 0.011985137168226134
+      },
+      "b1_block": {
+        "start_time": 1760536048.651055,
+        "end_time": 1760536048.790236,
+        "duration": 0.13918089866638184,
+        "selection_time": 0.0013039989702004658,
+        "construction_time": 0.014607470699546979,
+        "propagation_time": 0.10829056058233205,
+        "validation_time": 0.004724008413317009,
+        "block_size": 100,
+        "network_congestion": 0.0
+      },
+      "mt_creation": {
+        "start_time": 1760536048.790245,
+        "end_time": 1760536048.8540952,
+        "duration": 0.06385016441345215,
+        "proof_time": 0.04165631647289826,
+        "verification_time": 0.013705552406089228
+      },
+      "b2_block": {
+        "start_time": 1760536048.8541,
+        "end_time": 1760536049.0572748,
+        "duration": 0.20317482948303223,
+        "selection_time": 0.013400681635651618,
+        "construction_time": 0.022883873330292855,
+        "propagation_time": 0.14787851821988818,
+        "validation_time": 0.0071897669702935965,
+        "block_size": 100,
+        "network_congestion": 0.0
+      },
+      "tx_complexity": 0.7006795997710766,
+      "network_congestion": 0.0,
+      "timestamp": "2025-10-15T14:47:29.057287"
+    },
+    {
+      "transaction_id": 6,
+      "total_start_time": 1760536049.057354,
+      "total_end_time": 1760536050.4002938,
+      "total_duration": 1.342939853668213,
+      "pht_creation": {
+        "start_time": 1760536049.057356,
+        "end_time": 1760536049.147906,
+        "duration": 0.09054994583129883,
+        "commitment_time": 0.06090268008081939,
+        "nonce_time": 0.01966687791645299
+      },
+      "b1_block": {
+        "start_time": 1760536049.147912,
+        "end_time": 1760536049.8443441,
+        "duration": 0.6964321136474609,
+        "selection_time": 0.012764171251757762,
+        "construction_time": 0.025706921882813066,
+        "propagation_time": 0.6368291781639981,
+        "validation_time": 0.008867218887866464,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "mt_creation": {
+        "start_time": 1760536049.8443542,
+        "end_time": 1760536049.973321,
+        "duration": 0.1289668083190918,
+        "proof_time": 0.08604761486494734,
+        "verification_time": 0.03283672260703134
+      },
+      "b2_block": {
+        "start_time": 1760536049.973331,
+        "end_time": 1760536050.400288,
+        "duration": 0.4269571304321289,
+        "selection_time": 0.015316265280897187,
+        "construction_time": 0.02413713827374218,
+        "propagation_time": 0.3626077650917918,
+        "validation_time": 0.008914844213435118,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "tx_complexity": 1.3184415920125636,
+      "network_congestion": 0.3,
+      "timestamp": "2025-10-15T14:47:30.400297"
+    },
+    {
+      "transaction_id": 7,
+      "total_start_time": 1760536050.400337,
+      "total_end_time": 1760536050.8256278,
+      "total_duration": 0.4252908229827881,
+      "pht_creation": {
+        "start_time": 1760536050.400337,
+        "end_time": 1760536050.437073,
+        "duration": 0.03673601150512695,
+        "commitment_time": 0.029233869500089278,
+        "nonce_time": 0.0025701556977219603
+      },
+      "b1_block": {
+        "start_time": 1760536050.437077,
+        "end_time": 1760536050.5974028,
+        "duration": 0.1603257656097412,
+        "selection_time": 0.001,
+        "construction_time": 0.02797436213168289,
+        "propagation_time": 0.10858485328108798,
+        "validation_time": 0.009917202997738907,
+        "block_size": 100,
+        "network_congestion": 0.0
+      },
+      "mt_creation": {
+        "start_time": 1760536050.5974112,
+        "end_time": 1760536050.670302,
+        "duration": 0.0728907585144043,
+        "proof_time": 0.04014777143205392,
+        "verification_time": 0.023941832917920285
+      },
+      "b2_block": {
+        "start_time": 1760536050.670308,
+        "end_time": 1760536050.82562,
+        "duration": 0.15531182289123535,
+        "selection_time": 0.008320817474446083,
+        "construction_time": 0.026727386868381803,
+        "propagation_time": 0.09983388399708841,
+        "validation_time": 0.006592521498704513,
+        "block_size": 100,
+        "network_congestion": 0.0
+      },
+      "tx_complexity": 0.7852015055729771,
+      "network_congestion": 0.0,
+      "timestamp": "2025-10-15T14:47:30.825633"
+    },
+    {
+      "transaction_id": 8,
+      "total_start_time": 1760536050.8257139,
+      "total_end_time": 1760536052.9924889,
+      "total_duration": 2.1667749881744385,
+      "pht_creation": {
+        "start_time": 1760536050.825717,
+        "end_time": 1760536050.9413,
+        "duration": 0.11558294296264648,
+        "commitment_time": 0.08504506386017985,
+        "nonce_time": 0.02088710097863776
+      },
+      "b1_block": {
+        "start_time": 1760536050.941314,
+        "end_time": 1760536052.177296,
+        "duration": 1.2359819412231445,
+        "selection_time": 0.016408410709501085,
+        "construction_time": 0.023650816625148466,
+        "propagation_time": 1.1757569454671166,
+        "validation_time": 0.007031749017135551,
+        "block_size": 100,
+        "network_congestion": 0.7
+      },
+      "mt_creation": {
+        "start_time": 1760536052.1773078,
+        "end_time": 1760536052.353287,
+        "duration": 0.1759791374206543,
+        "proof_time": 0.11626906316133119,
+        "verification_time": 0.05453547726068284
+      },
+      "b2_block": {
+        "start_time": 1760536052.3532941,
+        "end_time": 1760536052.992482,
+        "duration": 0.6391878128051758,
+        "selection_time": 0.008164373336630636,
+        "construction_time": 0.018981471338710393,
+        "propagation_time": 0.5953615286231991,
+        "validation_time": 0.0038387453388897957,
+        "block_size": 100,
+        "network_congestion": 0.7
+      },
+      "tx_complexity": 1.9739394213557544,
+      "network_congestion": 0.7,
+      "timestamp": "2025-10-15T14:47:32.992494"
+    },
+    {
+      "transaction_id": 9,
+      "total_start_time": 1760536052.992564,
+      "total_end_time": 1760536055.2030258,
+      "total_duration": 2.2104618549346924,
+      "pht_creation": {
+        "start_time": 1760536052.992565,
+        "end_time": 1760536053.035038,
+        "duration": 0.04247307777404785,
+        "commitment_time": 0.027338823917971104,
+        "nonce_time": 0.008060940362866318
+      },
+      "b1_block": {
+        "start_time": 1760536053.0350442,
+        "end_time": 1760536053.7340858,
+        "duration": 0.6990416049957275,
+        "selection_time": 0.015365137673614082,
+        "construction_time": 0.010869874756965762,
+        "propagation_time": 0.6526054181486047,
+        "validation_time": 0.008142578825518523,
+        "block_size": 100,
+        "network_congestion": 0.7
+      },
+      "mt_creation": {
+        "start_time": 1760536053.734093,
+        "end_time": 1760536053.799276,
+        "duration": 0.06518316268920898,
+        "proof_time": 0.03340069157294245,
+        "verification_time": 0.021709301376040928
+      },
+      "b2_block": {
+        "start_time": 1760536053.7992818,
+        "end_time": 1760536055.203021,
+        "duration": 1.4037392139434814,
+        "selection_time": 0.010008874142156805,
+        "construction_time": 0.02943312630196132,
+        "propagation_time": 1.3378325975858885,
+        "validation_time": 0.011085493531722399,
+        "block_size": 100,
+        "network_congestion": 0.7
+      },
+      "tx_complexity": 0.5978308384978839,
+      "network_congestion": 0.7,
+      "timestamp": "2025-10-15T14:47:35.203029"
+    },
+    {
+      "transaction_id": 10,
+      "total_start_time": 1760536055.203073,
+      "total_end_time": 1760536056.735195,
+      "total_duration": 1.5321218967437744,
+      "pht_creation": {
+        "start_time": 1760536055.203074,
+        "end_time": 1760536055.280889,
+        "duration": 0.07781505584716797,
+        "commitment_time": 0.06320748391765128,
+        "nonce_time": 0.007628342029381233
+      },
+      "b1_block": {
+        "start_time": 1760536055.280894,
+        "end_time": 1760536055.88869,
+        "duration": 0.6077959537506104,
+        "selection_time": 0.015386263690579657,
+        "construction_time": 0.01391620955219733,
+        "propagation_time": 0.5519203248898353,
+        "validation_time": 0.011318458124557569,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "mt_creation": {
+        "start_time": 1760536055.8886971,
+        "end_time": 1760536056.054911,
+        "duration": 0.1662137508392334,
+        "proof_time": 0.10383251785067651,
+        "verification_time": 0.05605090309505124
+      },
+      "b2_block": {
+        "start_time": 1760536056.054927,
+        "end_time": 1760536056.735187,
+        "duration": 0.6802599430084229,
+        "selection_time": 0.005197188483860922,
+        "construction_time": 0.021842524016868384,
+        "propagation_time": 0.6434226636503656,
+        "validation_time": 0.006974301461370644,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "tx_complexity": 1.7126836351671972,
+      "network_congestion": 0.3,
+      "timestamp": "2025-10-15T14:47:36.735200"
+    }
+  ],
+  "pos_raw_data": [
+    {
+      "transaction_id": 1,
+      "total_start_time": 1760536056.735287,
+      "total_end_time": 1760536057.7952719,
+      "total_duration": 1.0599849224090576,
+      "mempool_time": 0.008151021952762736,
+      "block_proposal": {
+        "start_time": 1760536056.7455108,
+        "end_time": 1760536057.388942,
+        "duration": 0.6434311866760254,
+        "selection_time": 0.003789588322069417,
+        "construction_time": 0.02810492249181741,
+        "propagation_time": 0.5871940601313254,
+        "validation_time": 0.010633775242109131,
+        "block_size": 100,
+        "network_congestion": 0.5
+      },
+      "confirmation_time": 0.4012997039521632,
+      "tx_complexity": 0.9807497570064785,
+      "network_congestion": 0.5,
+      "timestamp": "2025-10-15T14:47:37.795279"
+    },
+    {
+      "transaction_id": 2,
+      "total_start_time": 1760536057.7953439,
+      "total_end_time": 1760536058.924611,
+      "total_duration": 1.1292672157287598,
+      "mempool_time": 0.010927438902541567,
+      "block_proposal": {
+        "start_time": 1760536057.809066,
+        "end_time": 1760536058.4195158,
+        "duration": 0.6104497909545898,
+        "selection_time": 0.009227668991144567,
+        "construction_time": 0.02157364371070595,
+        "propagation_time": 0.5681936585041198,
+        "validation_time": 0.005514871926910141,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "confirmation_time": 0.5017982288996718,
+      "tx_complexity": 0.6870245180734404,
+      "network_congestion": 0.3,
+      "timestamp": "2025-10-15T14:47:38.924624"
+    },
+    {
+      "transaction_id": 3,
+      "total_start_time": 1760536058.924743,
+      "total_end_time": 1760536059.8820622,
+      "total_duration": 0.9573192596435547,
+      "mempool_time": 0.028684221778336266,
+      "block_proposal": {
+        "start_time": 1760536058.95782,
+        "end_time": 1760536059.57694,
+        "duration": 0.6191201210021973,
+        "selection_time": 0.002072276331186394,
+        "construction_time": 0.026688298316043385,
+        "propagation_time": 0.5618295781643226,
+        "validation_time": 0.01797645876272864,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "confirmation_time": 0.30008775611506694,
+      "tx_complexity": 1.9445733629778894,
+      "network_congestion": 0.3,
+      "timestamp": "2025-10-15T14:47:39.882068"
+    },
+    {
+      "transaction_id": 4,
+      "total_start_time": 1760536059.8821492,
+      "total_end_time": 1760536061.251873,
+      "total_duration": 1.3697237968444824,
+      "mempool_time": 0.015014797902497108,
+      "block_proposal": {
+        "start_time": 1760536059.9009438,
+        "end_time": 1760536060.571754,
+        "duration": 0.6708102226257324,
+        "selection_time": 0.013890953821762442,
+        "construction_time": 0.015785995287689612,
+        "propagation_time": 0.6192697213382007,
+        "validation_time": 0.007886650664264508,
+        "block_size": 100,
+        "network_congestion": 0.3
+      },
+      "confirmation_time": 0.6750985869088133,
+      "tx_complexity": 1.8662141639679588,
+      "network_congestion": 0.3,
+      "timestamp": "2025-10-15T14:47:41.251881"
+    },
+    {
+      "transaction_id": 5,
+      "total_start_time": 1760536061.251936,
+      "total_end_time": 1760536063.0160651,
+      "total_duration": 1.7641291618347168,
+      "mempool_time": 0.0021634797324830025,
+      "block_proposal": {
+        "start_time": 1760536061.2546701,
+        "end_time": 1760536062.065048,
+        "duration": 0.810377836227417,
+        "selection_time": 0.001,
+        "construction_time": 0.025950691042539713,
+        "propagation_time": 0.7636856680400856,
+        "validation_time": 0.007514153022987484,
+        "block_size": 100,
+        "network_congestion": 0.5
+      },
+      "confirmation_time": 0.9460156951703014,
+      "tx_complexity": 0.8804156008632396,
+      "network_congestion": 0.5,
+      "timestamp": "2025-10-15T14:47:43.016069"
+    },
+    {
+      "transaction_id": 6,
+      "total_start_time": 1760536063.016112,
+      "total_end_time": 1760536064.427284,
+      "total_duration": 1.4111719131469727,
+      "mempool_time": 0.0021075346652443963,
+      "block_proposal": {
+        "start_time": 1760536063.018764,
+        "end_time": 1760536063.941997,
+        "duration": 0.9232330322265625,
+        "selection_time": 0.013443518702307826,
+        "construction_time": 0.012320946597811076,
+        "propagation_time": 0.8725175729536572,
+        "validation_time": 0.0107462258237749,
+        "block_size": 100,
+        "network_congestion": 0.5
+      },
+      "confirmation_time": 0.48351170858013653,
+      "tx_complexity": 0.7135244097791934,
+      "network_congestion": 0.5,
+      "timestamp": "2025-10-15T14:47:44.427293"
+    },
+    {
+      "transaction_id": 7,
+      "total_start_time": 1760536064.427361,
+      "total_end_time": 1760536066.1739898,
+      "total_duration": 1.746628761291504,
+      "mempool_time": 0.018659716357932416,
+      "block_proposal": {
+        "start_time": 1760536064.450714,
+        "end_time": 1760536065.0268748,
+        "duration": 0.5761606693267822,
+        "selection_time": 0.0014144192946388533,
+        "construction_time": 0.012240282604517238,
+        "propagation_time": 0.5336608569194042,
+        "validation_time": 0.01928855651283232,
+        "block_size": 100,
+        "network_congestion": 0.7
+      },
+      "confirmation_time": 1.1420723242150603,
+      "tx_complexity": 1.4418013101573934,
+      "network_congestion": 0.7,
+      "timestamp": "2025-10-15T14:47:46.174004"
+    },
+    {
+      "transaction_id": 8,
+      "total_start_time": 1760536066.174121,
+      "total_end_time": 1760536066.7067578,
+      "total_duration": 0.5326368808746338,
+      "mempool_time": 0.012625277728101032,
+      "block_proposal": {
+        "start_time": 1760536066.189621,
+        "end_time": 1760536066.516705,
+        "duration": 0.3270840644836426,
+        "selection_time": 0.002622834847261373,
+        "construction_time": 0.020061557057921647,
+        "propagation_time": 0.2828889578035674,
+        "validation_time": 0.010250343072633113,
+        "block_size": 100,
+        "network_congestion": 0.1
+      },
+      "confirmation_time": 0.1849964196068793,
+      "tx_complexity": 1.83034990955318,
+      "network_congestion": 0.1,
+      "timestamp": "2025-10-15T14:47:46.706768"
+    },
+    {
+      "transaction_id": 9,
+      "total_start_time": 1760536066.706843,
+      "total_end_time": 1760536068.390413,
+      "total_duration": 1.683570146560669,
+      "mempool_time": 0.0223218926230398,
+      "block_proposal": {
+        "start_time": 1760536066.734189,
+        "end_time": 1760536067.541686,
+        "duration": 0.8074970245361328,
+        "selection_time": 0.019043684347127096,
+        "construction_time": 0.01994053449921985,
+        "propagation_time": 0.7317298678029074,
+        "validation_time": 0.01766274935920194,
+        "block_size": 100,
+        "network_congestion": 0.5
+      },
+      "confirmation_time": 0.8437109880333222,
+      "tx_complexity": 1.5354600987029192,
+      "network_congestion": 0.5,
+      "timestamp": "2025-10-15T14:47:48.390421"
+    },
+    {
+      "transaction_id": 10,
+      "total_start_time": 1760536068.390502,
+      "total_end_time": 1760536068.991192,
+      "total_duration": 0.6006901264190674,
+      "mempool_time": 0.011453700499057577,
+      "block_proposal": {
+        "start_time": 1760536068.404864,
+        "end_time": 1760536068.6911612,
+        "duration": 0.286297082901001,
+        "selection_time": 0.00935311897976326,
+        "construction_time": 0.015332530503519438,
+        "propagation_time": 0.23679742696947154,
+        "validation_time": 0.011670859217040011,
+        "block_size": 100,
+        "network_congestion": 0.1
+      },
+      "confirmation_time": 0.2979131264784889,
+      "tx_complexity": 0.8538055837407865,
+      "network_congestion": 0.1,
+      "timestamp": "2025-10-15T14:47:48.991204"
+    }
+  ],
+  "network_conditions": [
+    0.0,
+    0.1,
+    0.3,
+    0.5,
+    0.7
+  ],
+  "metadata": {
+    "simulation_start": "2025-10-15T14:47:22.634834",
+    "total_transactions": 20,
+    "simulation_duration": 26.356441736221313
+  },
+  "analysis": {
+    "p2s_stats": {
+      "mean": 1.4099626541137695,
+      "median": 1.4375308752059937,
+      "min": 0.4252908229827881,
+      "max": 2.5076770782470703,
+      "std_dev": 0.7655243666389036,
+      "p95": 2.5076770782470703,
+      "p99": 2.5076770782470703
+    },
+    "pos_stats": {
+      "mean": 1.2255122184753418,
+      "median": 1.249495506286621,
+      "min": 0.5326368808746338,
+      "max": 1.7641291618347168,
+      "std_dev": 0.44793637439485856,
+      "p95": 1.7641291618347168,
+      "p99": 1.7641291618347168
+    },
+    "latency_increase": 0.18445043563842778,
+    "latency_increase_pct": 15.050885079538606
+  }
+}
