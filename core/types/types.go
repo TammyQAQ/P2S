@@ -126,8 +126,8 @@ type P2SConfig struct {
 // DefaultP2SConfig returns default P2S configuration
 func DefaultP2SConfig() *P2SConfig {
 	return &P2SConfig{
-		B1BlockTime:       12,  // 12 seconds
-		B2BlockTime:       12,  // 12 seconds
+		B1BlockTime:       6,  // 6 seconds for B1 block
+		B2BlockTime:       6,  // 6 seconds for B2 block
 		MinMEVScore:       0.7,
 		MaxMEVScore:       1.0,
 		MinStake:          big.NewInt(1000000000000000000), // 1 ETH

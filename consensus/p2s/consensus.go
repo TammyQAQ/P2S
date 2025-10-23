@@ -52,11 +52,19 @@ type Config struct {
 	ProofSystem      string
 }
 
+<<<<<<< HEAD:consensus/p2s/consensus.go
 // DefaultConfig returns default P2S configuration
 func DefaultConfig() *Config {
 	return &Config{
 		B1BlockTime:      12 * time.Second,
 		B2BlockTime:      12 * time.Second,
+=======
+// DefaultP2SConfig returns default P2S configuration
+func DefaultP2SConfig() *P2SConfig {
+	return &P2SConfig{
+		B1BlockTime:      6 * time.Second,  // 6 seconds for B1 block
+		B2BlockTime:      6 * time.Second,  // 6 seconds for B2 block
+>>>>>>> aed06d37c647135302699a70ad914684e835e22d:consensus/p2s/p2s.go
 		MinMEVScore:      0.7,
 		MaxMEVScore:      1.0,
 		MinStake:         big.NewInt(1000000000000000000), // 1 ETH
