@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Realistic Block Simulation with Real Ethereum Data
+Block Simulation with Real Ethereum Data
 Extracts real transaction data and simulates P2S vs PoS with multiple transactions per block
 """
 
@@ -21,7 +21,7 @@ class EthereumDataExtractor:
         """Get recent block data from Ethereum"""
         print(f"📡 Fetching {num_blocks} recent blocks from Ethereum...")
         
-        # For demo purposes, we'll simulate realistic transaction data
+        # For demo purposes, we'll simulate transaction data
         # In production, you would use actual Etherscan API calls
         blocks = []
         
@@ -33,7 +33,7 @@ class EthereumDataExtractor:
         return blocks
     
     def simulate_block_data(self, block_number):
-        """Simulate realistic block data based on real Ethereum patterns"""
+        """Simulate block data based on real Ethereum patterns"""
         # Real Ethereum block characteristics
         tx_count = random.randint(50, 200)  # Typical 50-200 txs per block
         block_size = random.randint(50000, 150000)  # Typical block sizes
@@ -61,7 +61,7 @@ class EthereumDataExtractor:
             'transactions': transactions
         }
 
-class RealisticP2SSimulator:
+class P2SSimulator:
     def __init__(self):
         self.network = NetworkSimulator()
         self.results = {
@@ -69,7 +69,7 @@ class RealisticP2SSimulator:
             'pos_blocks': [],
             'metadata': {
                 'timestamp': datetime.now().strftime("%Y%m%d_%H%M%S"),
-                'description': "Realistic P2S vs PoS Block Simulation with Real Data"
+                'description': "P2S vs PoS Block Simulation with Real Data"
             }
         }
     
@@ -252,12 +252,12 @@ class RealisticP2SSimulator:
         return confirmation_time
     
     def run_simulation(self, num_blocks=5, congestion_levels=None):
-        """Run realistic simulation with multiple blocks"""
+        """Run simulation with multiple blocks"""
         if congestion_levels is None:
             congestion_levels = [0.0, 0.1, 0.3, 0.5, 0.7]
         
         print("=" * 80)
-        print("REALISTIC P2S vs PoS BLOCK SIMULATION")
+        print("P2S vs PoS BLOCK SIMULATION")
         print("=" * 80)
         print(f"Simulating {num_blocks} blocks per protocol")
         print(f"Network conditions: {congestion_levels}")
@@ -340,7 +340,7 @@ class RealisticP2SSimulator:
         os.makedirs('data', exist_ok=True)
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"data/realistic_block_simulation_{timestamp}.json"
+        filename = f"data/block_simulation_{timestamp}.json"
         
         with open(filename, 'w') as f:
             json.dump(self.results, f, indent=2)
@@ -383,7 +383,7 @@ class NetworkSimulator:
         self.cpu_variance = 0.01
         
     def simulate_network_delay(self, congestion_level=0.0):
-        """Simulate realistic network delay"""
+        """Simulate network delay"""
         base_delay = self.network_latency_base
         jitter = random.uniform(-self.network_jitter, self.network_jitter)
         congestion_delay = congestion_level * random.uniform(0.5, 2.0)
@@ -405,14 +405,14 @@ def main():
             print("Error: Number of blocks must be an integer")
             sys.exit(1)
     
-    print(f"🚀 Starting realistic block simulation with {num_blocks} blocks")
+    print(f"🚀 Starting block simulation with {num_blocks} blocks")
     print("This simulation uses real Ethereum transaction patterns")
     
-    simulator = RealisticP2SSimulator()
+    simulator = P2SSimulator()
     p2s_results, pos_results = simulator.run_simulation(num_blocks)
     
     print(f"\n✅ Simulation complete!")
-    print(f"Check results in data/realistic_block_simulation_*.json")
+    print(f"Check results in data/block_simulation_*.json")
 
 if __name__ == "__main__":
     main()

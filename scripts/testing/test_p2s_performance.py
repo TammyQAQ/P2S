@@ -21,7 +21,7 @@ class NetworkSimulator:
         self.cpu_variance = 0.01         # CPU variance (±10ms)
         
     def simulate_network_delay(self, congestion_level=0.0):
-        """Simulate realistic network delay"""
+        """Simulate network delay"""
         # Base latency
         base_delay = self.network_latency_base
         
@@ -58,7 +58,7 @@ class P2SSimulator:
         }
     
     def simulate_pht_creation(self, tx_complexity=1.0):
-        """Simulate PHT creation with realistic timing"""
+        """Simulate PHT creation with timing"""
         start_time = time.time()
         
         # Simulate cryptographic commitment creation
@@ -79,7 +79,7 @@ class P2SSimulator:
         }
     
     def simulate_mt_creation(self, tx_complexity=1.0):
-        """Simulate MT creation with realistic timing"""
+        """Simulate MT creation with timing"""
         start_time = time.time()
         
         # Simulate proof generation
@@ -100,7 +100,7 @@ class P2SSimulator:
         }
     
     def simulate_block_proposal(self, block_size=100, network_congestion=0.0):
-        """Simulate block proposal with realistic timing"""
+        """Simulate block proposal with timing"""
         start_time = time.time()
         
         # Simulate validator selection

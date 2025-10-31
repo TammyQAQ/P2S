@@ -16,10 +16,10 @@ def load_latest_data(data_dir="data"):
     """Load the latest test data"""
     files = os.listdir(data_dir)
     
-    # Try realistic simulation data first
-    realistic_files = [f for f in files if f.startswith('realistic_block_simulation_')]
-    if realistic_files:
-        latest_file = max(realistic_files)
+    # Try block simulation data first
+    block_sim_files = [f for f in files if f.startswith('block_simulation_')]
+    if block_sim_files:
+        latest_file = max(block_sim_files)
         with open(f"{data_dir}/{latest_file}", 'r') as f:
             return json.load(f)
     
@@ -37,7 +37,7 @@ def create_inclusion_time_plots(data):
     """Create single horizontal violin plot for transaction inclusion time"""
     # Check data format and extract accordingly
     if 'p2s_blocks' in data and 'pos_blocks' in data:
-        # New realistic format - block-level data
+        # New format - block-level data
         p2s_times = [block['total_time'] for block in data['p2s_blocks']]
         pos_times = [block['total_time'] for block in data['pos_blocks']]
         title_suffix = " (Block Processing Time)"
