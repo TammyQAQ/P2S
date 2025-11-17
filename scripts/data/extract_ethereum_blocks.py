@@ -180,25 +180,10 @@ class EthereumBlockExtractor:
         # Save cache
         self.save_cache()
         
-        # Save extracted blocks
-        output_file = f"data/ethereum_blocks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        with open(output_file, 'w') as f:
-            json.dump({
-                'blocks': blocks,
-                'metadata': {
-                    'extraction_time': datetime.now().isoformat(),
-                    'num_blocks': num_blocks,
-                    'block_interval': block_interval,
-                    'start_block': start_block,
-                    'cached_blocks': cached_count,
-                    'fetched_blocks': fetched_count
-                }
-            }, f, indent=2)
-        
         print(f"\n✅ Extraction complete!")
         print(f"   Cached: {cached_count} blocks")
         print(f"   Fetched: {fetched_count} blocks")
-        print(f"   Saved to: {output_file}")
+        print(f"   Cache file: {self.cache_file}")
         
         return blocks
 

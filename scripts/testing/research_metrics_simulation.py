@@ -51,21 +51,20 @@ class ResearchMetricsSimulator:
         self.block_rewards = defaultdict(float)
         
     def load_ethereum_blocks(self, data_dir="data") -> List[Dict]:
-        """Load real Ethereum block data"""
-        # Find latest ethereum blocks file
-        files = sorted(glob.glob(f"{data_dir}/ethereum_blocks_*.json"), key=os.path.getmtime, reverse=True)
+        """Load real Ethereum block data from cache"""
+        cache_file = f"{data_dir}/ethereum_blocks_cache.json"
         
-        if not files:
+        if not os.path.exists(cache_file):
             print("⚠️  No Ethereum block data found. Run extract_ethereum_blocks.py first.")
             return []
         
-        latest_file = files[0]
-        print(f"📂 Loading Ethereum blocks from: {latest_file}")
+        print(f"📂 Loading Ethereum blocks from cache: {cache_file}")
         
-        with open(latest_file, 'r') as f:
-            data = json.load(f)
-            blocks = data.get('blocks', [])
-            print(f"✅ Loaded {len(blocks)} blocks")
+        with open(cache_file, 'r') as f:
+            cached_data = json.load(f)
+            # Cache is a dict of block_number -> block_data
+            blocks = list(cached_data.values())
+            print(f"✅ Loaded {len(blocks)} blocks from cache")
             return blocks
     
     def create_validator(self, validator_id: str, stake: float, protocol: str):
