@@ -11,8 +11,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-# Set style
-sns.set_style("whitegrid")
+# Set style with coherent colors
+sns.set_theme(style="white")
+# Use a consistent color palette: P2S = green, Current Ethereum = blue
+P2S_COLOR = '#2ecc71'  # Green
+ETH_COLOR = '#3498db'  # Blue
+COLORS = [P2S_COLOR, ETH_COLOR]
 plt.rcParams['figure.dpi'] = 300
 plt.rcParams['savefig.dpi'] = 300
 
@@ -36,9 +40,9 @@ def plot_transaction_throughput(data):
     
     fig, ax = plt.subplots(figsize=(10, 6))
     
-    ax.hist(pos_tx_time, bins=30, alpha=0.6, label='PoS', color='#3498db', 
+    ax.hist(pos_tx_time, bins=30, alpha=0.6, label='Current Ethereum', color=ETH_COLOR, 
             edgecolor='black', linewidth=1)
-    ax.hist(p2s_tx_time, bins=30, alpha=0.6, label='P2S', color='#2ecc71', 
+    ax.hist(p2s_tx_time, bins=30, alpha=0.6, label='P2S', color=P2S_COLOR, 
             edgecolor='black', linewidth=1)
     
     ax.set_xlabel('Processing Time (seconds)', fontsize=12)
@@ -63,9 +67,9 @@ def plot_network_latency(data):
     
     fig, ax = plt.subplots(figsize=(10, 6))
     
-    ax.hist(pos_tx_latency, bins=30, alpha=0.6, label='PoS', color='#3498db', 
+    ax.hist(pos_tx_latency, bins=30, alpha=0.6, label='Current Ethereum', color=ETH_COLOR, 
             edgecolor='black', linewidth=1)
-    ax.hist(p2s_tx_latency, bins=30, alpha=0.6, label='P2S', color='#2ecc71', 
+    ax.hist(p2s_tx_latency, bins=30, alpha=0.6, label='P2S', color=P2S_COLOR, 
             edgecolor='black', linewidth=1)
     
     ax.set_xlabel('Network Latency (seconds)', fontsize=12)
@@ -90,9 +94,9 @@ def plot_gas_cost_distribution(data):
     
     fig, ax = plt.subplots(figsize=(10, 6))
     
-    ax.hist(pos_tx_gas, bins=30, alpha=0.6, label='PoS', color='#3498db', 
+    ax.hist(pos_tx_gas, bins=30, alpha=0.6, label='Current Ethereum', color=ETH_COLOR, 
             edgecolor='black', linewidth=1)
-    ax.hist(p2s_tx_gas, bins=30, alpha=0.6, label='P2S', color='#2ecc71', 
+    ax.hist(p2s_tx_gas, bins=30, alpha=0.6, label='P2S', color=P2S_COLOR, 
             edgecolor='black', linewidth=1)
     
     ax.set_xlabel('Gas (units)', fontsize=12)
@@ -107,87 +111,46 @@ def plot_gas_cost_distribution(data):
     plt.close()
     print("  ✓ Saved: figures/overhead_gas_distribution.png")
 
-def plot_transaction_cost_comparison(data):
-    """Plot transaction cost comparison"""
-    analysis = data['analysis']
-    cost_means = [
-        analysis['transaction']['p2s']['gas_cost_usd']['mean'],
-        analysis['transaction']['pos']['gas_cost_usd']['mean']
-    ]
-    labels = ['P2S', 'PoS']
-    colors = ['#2ecc71', '#3498db']
-    
-    fig, ax = plt.subplots(figsize=(8, 6))
-    
-    bars = ax.bar(labels, cost_means, color=colors, alpha=0.7, edgecolor='black', linewidth=1.5)
-    ax.set_ylabel('Cost (USD)', fontsize=12)
-    ax.set_title('Average Transaction Cost', fontsize=14, fontweight='bold')
-    ax.grid(True, alpha=0.3, axis='y')
-    
-    for bar, val in zip(bars, cost_means):
-        height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., height,
-                f'${val:.4f}', ha='center', va='bottom', fontsize=11, fontweight='bold')
-    
-    plt.tight_layout()
-    os.makedirs('figures', exist_ok=True)
-    plt.savefig('figures/overhead_transaction_cost.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    print("  ✓ Saved: figures/overhead_transaction_cost.png")
 
-def plot_processing_time_comparison(data):
-    """Plot processing time comparison"""
-    analysis = data['analysis']
-    time_means = [
-        analysis['transaction']['p2s']['total_time']['mean'],
-        analysis['transaction']['pos']['total_time']['mean']
-    ]
-    labels = ['P2S', 'PoS']
-    colors = ['#2ecc71', '#3498db']
-    
-    fig, ax = plt.subplots(figsize=(8, 6))
-    
-    bars = ax.bar(labels, time_means, color=colors, alpha=0.7, edgecolor='black', linewidth=1.5)
-    ax.set_ylabel('Time (seconds)', fontsize=12)
-    ax.set_title('Average Transaction Processing Time', fontsize=14, fontweight='bold')
-    ax.grid(True, alpha=0.3, axis='y')
-    
-    for bar, val in zip(bars, time_means):
-        height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., height,
-                f'{val:.4f}s', ha='center', va='bottom', fontsize=11, fontweight='bold')
-    
-    plt.tight_layout()
-    os.makedirs('figures', exist_ok=True)
-    plt.savefig('figures/overhead_processing_time.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    print("  ✓ Saved: figures/overhead_processing_time.png")
+
+
 
 def plot_overhead_ratios(data):
-    """Plot overhead ratios"""
+    """Plot overhead ratios - P2S overhead compared to Current Ethereum"""
     overhead_ratios = data['analysis']['overhead_ratios']
     overhead_values = [
         overhead_ratios['time_overhead_pct'],
         overhead_ratios['gas_overhead_pct'],
         overhead_ratios['cost_overhead_pct']
     ]
-    overhead_labels = ['Time', 'Gas', 'Cost']
-    colors = ['#e74c3c', '#f39c12', '#9b59b6']
+    overhead_labels = ['Processing\nTime', 'Gas\nUsage', 'Transaction\nCost']
     
-    fig, ax = plt.subplots(figsize=(8, 6))
+    # Use seaborn color palette with consistent colors
+    colors = sns.color_palette("Set2", 3)
     
-    bars = ax.bar(overhead_labels, overhead_values, color=colors, alpha=0.7, 
-                   edgecolor='black', linewidth=1.5)
-    ax.set_ylabel('Overhead (%)', fontsize=12)
-    ax.set_title('P2S Overhead vs PoS', fontsize=14, fontweight='bold')
-    ax.axhline(y=0, color='black', linestyle='-', linewidth=1)
-    ax.grid(True, alpha=0.3, axis='y')
+    fig, ax = plt.subplots(figsize=(10, 7))
     
+    bars = ax.bar(overhead_labels, overhead_values, color=colors, alpha=0.8, 
+                   edgecolor='black', linewidth=2, width=0.6)
+    ax.set_ylabel('Overhead (%)', fontsize=13, fontweight='bold')
+    ax.set_title('P2S Overhead Compared to Current Ethereum\n(Positive = P2S has higher overhead)', 
+                fontsize=15, fontweight='bold', pad=15)
+    ax.axhline(y=0, color='black', linestyle='-', linewidth=1.5)
+    ax.grid(True, alpha=0.3, axis='y', linestyle='--')
+    
+    # Add value labels
     for bar, val in zip(bars, overhead_values):
         height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., height,
-                f'{val:.1f}%', ha='center', va='bottom' if val >= 0 else 'top', 
-                fontsize=11, fontweight='bold')
+        ax.text(bar.get_x() + bar.get_width()/2., height + 5,
+                f'{val:.1f}%', ha='center', va='bottom', 
+                fontsize=13, fontweight='bold')
+    
+    # Add explanation text
+    explanation = 'Overhead = ((P2S - Ethereum) / Ethereum) × 100%\n'
+    explanation += 'Shows how much more overhead P2S has compared to Current Ethereum'
+    ax.text(0.5, 0.95, explanation, transform=ax.transAxes, fontsize=10,
+            verticalalignment='top', horizontalalignment='center',
+            bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
     
     plt.tight_layout()
     os.makedirs('figures', exist_ok=True)
@@ -256,14 +219,14 @@ def plot_block_time_comparison(data):
     
     # Left: Block time distribution
     ax1.hist(pos_blk_total_time, bins=40, alpha=0.6, label='Current Ethereum', 
-            color='#3498db', edgecolor='black', linewidth=1)
+            color=ETH_COLOR, edgecolor='black', linewidth=1)
     ax1.hist(p2s_blk_total_time, bins=40, alpha=0.6, label='P2S', 
-            color='#2ecc71', edgecolor='black', linewidth=1)
+            color=P2S_COLOR, edgecolor='black', linewidth=1)
     
     # Add mean lines
-    ax1.axvline(pos_total_mean, color='#2980b9', linestyle='--', linewidth=2, 
+    ax1.axvline(pos_total_mean, color=ETH_COLOR, linestyle='--', linewidth=2, 
                label=f'Ethereum Mean: {pos_total_mean:.3f}s')
-    ax1.axvline(p2s_total_mean, color='#27ae60', linestyle='--', linewidth=2,
+    ax1.axvline(p2s_total_mean, color=P2S_COLOR, linestyle='--', linewidth=2,
                label=f'P2S Mean: {p2s_total_mean:.3f}s')
     
     ax1.set_xlabel('Total Block Time (seconds)', fontsize=12, fontweight='bold')
@@ -275,9 +238,8 @@ def plot_block_time_comparison(data):
     # Right: Block time comparison bar chart
     block_time_means = [pos_total_mean, p2s_total_mean]
     labels = ['Current Ethereum', 'P2S']
-    colors = ['#3498db', '#2ecc71']
     
-    bars = ax2.bar(labels, block_time_means, color=colors, alpha=0.8, 
+    bars = ax2.bar(labels, block_time_means, color=[ETH_COLOR, P2S_COLOR], alpha=0.8, 
                    edgecolor='black', linewidth=2, width=0.6)
     
     # Add value labels
@@ -376,8 +338,8 @@ def plot_cost_vs_time_scatter(data):
     
     fig, ax = plt.subplots(figsize=(10, 6))
     
-    ax.scatter(pos_tx_time, pos_tx_cost, alpha=0.5, label='PoS', color='#3498db', s=30)
-    ax.scatter(p2s_tx_time, p2s_tx_cost, alpha=0.5, label='P2S', color='#2ecc71', s=30)
+    ax.scatter(pos_tx_time, pos_tx_cost, alpha=0.5, label='Current Ethereum', color=ETH_COLOR, s=30)
+    ax.scatter(p2s_tx_time, p2s_tx_cost, alpha=0.5, label='P2S', color=P2S_COLOR, s=30)
     
     ax.set_xlabel('Processing Time (seconds)', fontsize=12)
     ax.set_ylabel('Cost (USD)', fontsize=12)
@@ -407,8 +369,6 @@ def main():
     plot_transaction_throughput(data)
     plot_network_latency(data)
     plot_gas_cost_distribution(data)
-    plot_transaction_cost_comparison(data)
-    plot_processing_time_comparison(data)
     plot_overhead_ratios(data)
     plot_block_time_comparison(data)
     plot_cost_vs_time_scatter(data)
